@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <!-- Make it compatible to mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stress level</title>
+  
+  <style type="text/css">
+
+    .formBg{
+      padding: 25px;
+      display:inline-block;
+      text-align:center;
+      font-size: 18px;
+    }
+
+    .formText{
+      color: #abd1c6;
+    }
+
+    .predictText{
+      font-size: 24px;
+      color: #f9bc60;
+    }
+
+    .predictBtn{
+      border-radius: 15px;
+      padding: 14px 40px;
+      font-size: 16px;
+      color: #001e1d;
+      background-color: #f9bc60;
+      border-width: 0px;
+    }
+
+    .predictBtn:hover {
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+    }
+
+    hr{
+      border: 1px solid #e16162;
+      width: 100px;
+    }
+
+    .slider{
+      padding: 20px;
+      background: #fcfcfc;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .slider input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none; 
+      width: 100%;
+      cursor: pointer;
+      outline: none;
+      overflow: hidden;
+      border-radius: 16px;
+    }
+
+    .slider input[type="range"]::-webkit-slider-runnable-track {
+      height: 15px;
+      background: #ccc;
+      border-radius: 16px;
+    }
+
+    .slider input[type="range"]::-moz-range-track {
+      height: 15px;
+      background: #e16162;
+      border-radius: 16px;
+    }
+
+    .slider input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none; 
+      height: 15px;
+      width: 15px;
+      background-color: #fff;
+      border-radius: 50%;
+      border: 2px solid #f9bc60;
+      box-shadow: -407px 0 0 400px #f9bc60;
+    }
+
+    .slider input[type="range"]::-moz-range-thumb {
+      height: 15px;
+      width: 15px;
+      background-color: #fff;
+      border-radius: 50%;
+      border: 1px solid #f9bc60;
+      box-shadow: -407px 0 0 400px #f9bc60;
+    }
+
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #f9bc60;
+      text-align: center;
+    }
+
+    .footerText {
+      color: #001e1d;
+      font-size: 18px;
+    }
+
+  </style>
+
+</head>
+
+<body style="background: #004643;">
+  <center>
+   <h1 style="color:#fffffe;">Stress level prediction</h1>
+   <hr>
+   <br>
+   <div class="formBg">
+    <form action="{{ url_for('predict')}}"method="post">
+
+      <label class="formText">Oxygen level (%): </label>
+      <label id="oxyValue" class="formText">95</label>
+      <div class="slider">
+        <input type="range" name="OXLY" min="0" max="100" value="95" oninput="oxyValue.innerText = this.value">
+      </div><br><br>
+
+      <label class="formText">Heart rate (bps) </label>
+      <label id="hrValue" class="formText">72</label>
+      <div class="slider">
+        <input type="range" name="HR" min="40" max="140" value="72" oninput="hrValue.innerText = this.value">
+      </div><br><br>
+
+      <label class="formText">Sleep hours (hrs): </label>
+      <label id="slValue" class="formText">6</label><br>
+      <div class="slider">
+        <input type="range" name="SLEEP" min="3" max="10" value="6" id="fader" step="1" list="sleepsettings" oninput="slValue.innerText = this.value">
+        <datalist id="sleepsettings">
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+        </datalist>
+      </div><br><br>
+
+      <label class="formText">Are you suffering any academic pressure? </label>
+      <input type="radio" id="yes" name="AP" value="1" required>
+      <label class="formText" for="yes">Yes</label>
+
+      <input type="radio" id="no" name="AP" value="0">
+      <label class="formText" for="no">No</label><br><br>
+
+      <label class="formText">Do you have any concerns regarding your social life? </label>
+      <input type="radio" id="yes" name="SI" value="1" required>
+      <label class="formText" for="yes">Yes</label>
+
+      <input type="radio" id="no" name="SI" value="0">
+      <label class="formText" for="no">No</label><br><br>
+
+      <p>
+        <button class="predictBtn" type="submit" class="btn btn-primary btn-block btn-large">Predict stress level</button>
+      </p>
+    </form>
+  </div>
+
+  <h4 class="predictText">{{ predictionText }}</h4>
+</center>
+
+<div class="footer">
+  <p class="footerText">Stress predictor tool developed under research done by Ishan Jain, Sarbeswar Mahapatra and Sajidullah F. || Accuracy Level 95% to 97%</p>
+</div>
+
+</body>
+</html>
