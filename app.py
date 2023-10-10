@@ -28,6 +28,3 @@ def predict():
         msg = '-> High'
 
     return render_template('index.html', predictionText = 'Stress level: {}'.format(output)+' '+msg)
-
-if __name__== "__main__":
-    app.run()
