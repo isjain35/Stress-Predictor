@@ -3,7 +3,7 @@
     "builds": [
         {
             "src": "*.py",
-            "use": "@isjain35/Stress-Predictor"
+            "use": "@liudonghua123/now-flask"
         }
     ],
     "routes": [
